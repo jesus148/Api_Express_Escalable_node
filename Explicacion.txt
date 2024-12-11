@@ -1,7 +1,7 @@
 
 
 https://www.youtube.com/watch?v=T1QFGwOnQxQ
-2:17:30
+2:38:00
 
 1. 
   instalando dependencias :
@@ -181,7 +181,11 @@ dependencias ose esto se usa cuando ejecutas el servidor
  14. 
     incializando git
  > git init
+ > git add .
+ > git commit -m "test" 
 
+ ojo: crear tu repo en tu github
+    lo vinculas con tu repo remoto con git remote
 
 
 
