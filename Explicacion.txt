@@ -1,0 +1,189 @@
+
+
+https://www.youtube.com/watch?v=T1QFGwOnQxQ
+2:17:30
+
+1. 
+  instalando dependencias :
+ de manera global osea en la pc 
+
+PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\express\api_escalable_expess> npm i ts-node -g
+
+transpilar codigo 
+ PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\express\api_escalable_expess> npm i typescript -g
+
+mapear los cambios
+ PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\express\api_escalable_expess> npm i nodemon -g
+
+
+  sirve para encriptar y usar el jsonwebtoken
+ PS C:\Users\jesus\Desktop\JESUS\EXPRESS_PROYECTOS\3_ejercisio\api_escalable_expess> npm i bcryptjs jsonwebtoken
+
+para usar con el .ts
+PS C:\Users\jesus\Desktop\JESUS\EXPRESS_PROYECTOS\3_ejercisio\api_escalable_expess> npm i @types/bcryptjs @types/jsonwebtoken -D
+
+
+
+
+ 2. 
+  instalando e iniciando .ts 
+
+   PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\express\api_escalable_expess> tsc --init
+
+
+
+
+3.
+   iniciando proyecto express de manera facil
+   PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\express\api_escalable_expess> npm init -y 
+
+
+
+
+4. instalando dependencias
+PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\express\api_escalable_expess> npm i express cors dotenv multer mongoose
+
+multer : sirve como subir archivos a nuestra aplicacion 
+Multer es un middleware de node.js para manejar datos de formularios/multipartes, que se utiliza principalmente para cargar archivos. Está escrito encima del ayudante de camarero para máxima eficiencia.
+express : framework de express 
+cors : nucleos para peticiones al api 
+dontenv : variables de entorno 
+moongose : orm de mongodb
+
+
+
+5. 
+ instalando dependencia en desarollo 
+ se pone @ pq usamos types y trabaremos junto con eso ejemplo @types/express  para q types trabaje con express
+ PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\express\api_escalable_expess> npm i @types/express @types/cors @types/dotenv @types/multer @types/mongoose -D
+
+
+
+
+
+ 6. 
+
+dependencias ose esto se usa cuando ejecutas el servidor 
+   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  y esto se usa cuando escribes codigo 
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.97",
+    "@types/multer": "^1.4.12"
+  }
+  
+
+
+  7. 
+   crear el file .gitignore  para omitir al pushear
+     >      
+      node_modules
+      storage/*    ---- se ignora todo
+      !storage/.gitkeep    --- como ignoraste arriba todo solo excluye esto , osea esto no lo ignora
+                               pero el resto q este dentro de storage si lo ignorara.
+      .env   --- por seguridad 
+      dist/
+
+
+
+
+  8. estructura del proyecto , folder o file q no veas debes crearlo
+    > src
+       > controllers
+       > models 
+       >routes 
+    > storage 
+    .env    (variables de entorno)
+    .env.example (variables de entorno esto lo veran otros solo para mostrar las variables de entorno)
+ 
+
+
+
+
+  9.
+    comando para ejecutar la app 
+     en el package.json 
+  "scripts": {
+    "dev":"nodemon ./src/app.ts"
+  },      
+     
+      > npm run dev 
+     
+
+  10. 
+     BASE DE DATOS 
+        > api_escalable_expess\src\config\mongo.ts
+           configurar correctamente tu bd en ese file 
+        > al registrar algo se creara la tabla o coleccion junto con sus tablas   
+
+
+
+ 11. 
+   explicacion del JSON WEB TOKEN 
+
+   https://jwt.io/ _-------DOCUMENTACION 
+
+   estructura de un token : 
+   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c       
+
+   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9 : es el header de un token basicamente es dice q tipo de token 
+                                     ejemplo de un header : Authorization: Bearer <token>
+
+   eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ : payload el cuerpo de token , 
+                                                                               no poner datos confidenciales.
+
+ SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c : firma del token .Garantiza la integridad del token y evita que sea modificado por terceros.
+
+
+
+
+ 12. 
+  configurando .ts para llevarlo a produccion 
+  tsconfig.json : borrar todo y poner solo esto
+    "outDir": "./dist"  : file de salida donde se transpilara
+  {
+  "compilerOptions": {
+    "target": "es2016",                                 
+    "module": "commonjs",                                /* Specify what module code is generated. */
+    "esModuleInterop": true,                            
+    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "skipLibCheck": true,                   /* Skip type checking all .d.ts files. */
+    "outDir": "./dist" 
+  }
+}
+
+
+13. 
+  file package.json  agregar esto
+    
+  "scripts": {
+    "dev": "nodemon ./src/app.ts",
+    "build":"tsc"   ---- agregar esto .es para contruir a .js
+                         osea pasar de .ts a .js
+    "start": "node ./dist/app.js"  ----correr en produccion
+  },
+
+> ejecutar esto en la terminal 
+ npm run build
+
+
+
+
+ 14. 
+    incializando git
+ > git init
+
+
+
+
+ 15. 
+  
